@@ -52,6 +52,7 @@ lsof -i :4096 -sTCP:LISTEN
 
 If not running, start without password:
 ```bash
+unset OPENCODE_SERVER_USERNAME OPENCODE_SERVER_PASSWORD
 opencode web --hostname 0.0.0.0 --port 4096 &
 ```
 
