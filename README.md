@@ -11,6 +11,7 @@ This skill automatically sets up secure remote access to OpenCode, allowing you 
 - Automatic Tailscale installation and configuration
 - One-command remote access setup
 - Secure private network via WireGuard encryption
+- QR code generation for easy mobile scanning
 - No cloud dependency - everything runs locally
 - Works on macOS and Linux
 
@@ -37,7 +38,7 @@ The skill will automatically:
 1. Check/install Tailscale CLI
 2. Connect to your Tailscale network
 3. Start the OpenCode web server
-4. Provide you with the access URL
+4. Display access URL with QR code for easy scanning
 
 ## Manual Setup
 
@@ -68,7 +69,8 @@ opencode-remote-control-skill/
     └── remote-control/
         ├── SKILL.md                    # Skill definition for OpenCode
         └── scripts/
-            └── remote-control-setup.sh # Automated setup script
+            ├── remote-control-setup.sh # Automated setup script
+            └── generate-qr.sh          # QR code generator
 ```
 
 ## Troubleshooting
@@ -77,6 +79,7 @@ opencode-remote-control-skill/
 |-------|----------|
 | App Store Tailscale CLI crashes | Install Homebrew CLI: `brew install tailscale` |
 | Port 4096 in use | Set `OPENCODE_PORT=4097` environment variable |
+| QR code not displaying | Install qrencode: `brew install qrencode` (macOS) or `sudo apt install qrencode` (Linux) |
 | sudo required for symlink | Run: `sudo ln -s /Applications/Tailscale.app/Contents/MacOS/Tailscale /usr/local/bin/tailscale` |
 
 ## License

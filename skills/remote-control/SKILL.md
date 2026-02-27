@@ -76,10 +76,12 @@ Remote Access Ready!
 Tailscale IP: 100.x.y.z
 Access URL: http://100.x.y.z:4096
 
+[QR Code displayed for easy scanning]
+
 To connect from another device:
 1. Install Tailscale on that device
 2. Sign in to the same Tailscale account
-3. Open the Access URL in browser
+3. Scan the QR code or open the Access URL in browser
 ```
 
 ## Troubleshooting

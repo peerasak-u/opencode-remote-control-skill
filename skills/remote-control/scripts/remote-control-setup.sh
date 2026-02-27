@@ -367,6 +367,33 @@ start_opencode_server() {
     return 1
 }
 
+get_script_dir() {
+    local source="${BASH_SOURCE[0]}"
+    while [[ -L "$source" ]]; do
+        local dir
+        dir="$(cd -P "$(dirname "$source")" && pwd)"
+        source="$(readlink "$source")"
+        [[ "$source" != /* ]] && source="$dir/$source"
+    done
+    echo "$(cd -P "$(dirname "$source")" && pwd)"
+}
+
+generate_qr_code() {
+    local url="$1"
+    local script_dir
+    script_dir=$(get_script_dir)
+    
+    if [[ -x "$script_dir/generate-qr.sh" ]]; then
+        "$script_dir/generate-qr.sh" "$url"
+    elif command -v qrencode &> /dev/null; then
+        echo ""
+        echo -e "${GREEN}  Scan this QR code with your phone/tablet:${NC}"
+        echo ""
+        qrencode -t ANSIUTF8 -m 2 "$url"
+        echo ""
+    fi
+}
+
 print_connection_info() {
     local ts_ip
     local ts_hostname
@@ -390,6 +417,8 @@ print_connection_info() {
         if [[ -n "$ts_hostname" ]]; then
             echo -e "    ${CYAN}http://$ts_hostname:$PORT${NC}"
         fi
+        
+        generate_qr_code "http://$ts_ip:$PORT"
     else
         echo -e "  ${RED}Could not determine Tailscale IP${NC}"
     fi
