@@ -20,7 +20,8 @@ opencode-remote-control-skill/
     └── remote-control/
         ├── SKILL.md                    # Skill definition for OpenCode
         └── scripts/
-            └── remote-control-setup.sh # Automated setup script
+            ├── remote-control-setup.sh # Automated setup script
+            └── generate-qr.sh          # QR code generator
 ```
 
 ## Build/Lint/Test Commands
